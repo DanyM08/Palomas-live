@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Palomas Live · Mis hojas</title>
+  <link rel="icon" href="img/logo.png">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body class="cargando">
+  <header class="barra">
+    <div class="barra-marca">
+      <img src="img/logo.png" alt="" class="barra-logo">
+      <span>Palomas Live</span>
+    </div>
+    <div class="barra-usuario">
+      <span id="usuario-nombre"></span>
+      <button id="salir" class="btn-salir">Salir</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="seccion-cabeza">
+      <div>
+        <h2 id="saludo"></h2>
+        <p class="descripcion">Aquí ves lo que ganaste y perdiste cada día.</p>
+      </div>
+    </div>
+
+    <div id="mis-hojas"></div>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.4.0/exceljs.min.js"></script>
+  <script type="module" src="js/usuario.js"></script>
+</body>
+</html>

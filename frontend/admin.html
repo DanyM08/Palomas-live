@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Palomas Live · Admin</title>
+  <link rel="icon" href="img/logo.png">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body class="cargando">
+  <header class="barra">
+    <div class="barra-marca">
+      <img src="img/logo.png" alt="" class="barra-logo">
+      <span>Palomas Live</span>
+    </div>
+    <div class="barra-usuario">
+      <span id="usuario-nombre"></span>
+      <button id="salir" class="btn-salir">Salir</button>
+    </div>
+  </header>
+
+  <nav class="pestanas">
+    <button class="pestana activa" data-seccion="captura">Capturar</button>
+    <button class="pestana" data-seccion="hojas">Hojas</button>
+    <button class="pestana" data-seccion="comisiones">Comisiones</button>
+    <button class="pestana" data-seccion="usuarios">Usuarios</button>
+  </nav>
+
+  <main>
+    <!-- 1. Capturar: las peleas del día y quién apostó -->
+    <section id="captura" class="seccion activa">
+      <div class="seccion-cabeza">
+        <div>
+          <h2>Capturar día</h2>
+          <p class="descripcion">Los puntos van en miles: escribe <strong>10</strong> para 10,000.</p>
+        </div>
+        <label class="campo campo-fecha">Fecha
+          <input type="date" id="fecha">
+        </label>
+      </div>
+
+      <div id="peleas"></div>
+
+      <div class="acciones">
+        <button id="agregar-pelea" class="btn">+ Agregar pelea</button>
+        <button id="guardar-dia" class="btn btn-principal">Guardar día</button>
+      </div>
+      <p id="mensaje" class="mensaje" role="status"></p>
+    </section>
+
+    <!-- 2. Hojas: buscar a cualquier persona -->
+    <section id="hojas" class="seccion">
+      <div class="seccion-cabeza">
+        <div>
+          <h2>Hojas</h2>
+          <p class="descripcion">Busca a una persona para ver y descargar sus hojas.</p>
+        </div>
+      </div>
+
+      <form id="buscar-jugador" class="buscador">
+        <input id="jugador" list="lista-jugadores" placeholder="Nombre del jugador" autocomplete="off" required>
+        <button class="btn btn-principal">Buscar</button>
+      </form>
+
+      <div id="hojas-resultado"></div>
+    </section>
+
+    <!-- 3. Comisiones: el 10% de lo ganado por persona -->
+    <section id="comisiones" class="seccion">
+      <div class="seccion-cabeza">
+        <div>
+          <h2>Comisiones</h2>
+          <p class="descripcion">Lo que se queda la casa de lo que ganó cada persona.</p>
+        </div>
+      </div>
+
+      <form id="filtro-comisiones" class="filtros">
+        <label class="campo">Desde
+          <input type="date" id="comisiones-desde">
+        </label>
+        <label class="campo">Hasta
+          <input type="date" id="comisiones-hasta">
+        </label>
+        <button class="btn btn-principal">Consultar</button>
+        <button type="button" id="comisiones-todo" class="btn">Ver todo</button>
+      </form>
+
+      <div id="comisiones-resultado"></div>
+    </section>
+
+    <!-- 4. Usuarios: solo el admin crea cuentas -->
+    <section id="usuarios" class="seccion">
+      <div class="seccion-cabeza">
+        <div>
+          <h2>Usuarios</h2>
+          <p class="descripcion">Cada cuenta ve únicamente las hojas del jugador que le asignes.</p>
+        </div>
+      </div>
+
+      <form id="nuevo-usuario" class="tarjeta formulario">
+        <h3>Crear cuenta</h3>
+        <div class="formulario-campos">
+          <label class="campo">Jugador (como aparece en la captura)
+            <input id="nu-nombre" list="lista-jugadores" autocomplete="off" required>
+          </label>
+          <label class="campo">Usuario
+            <input id="nu-usuario" autocomplete="off" autocapitalize="none" required>
+          </label>
+          <label class="campo">Contraseña
+            <input id="nu-contrasena" type="text" minlength="6" autocomplete="new-password" required>
+          </label>
+        </div>
+        <button class="btn btn-principal">Crear cuenta</button>
+        <p id="usuarios-mensaje" class="mensaje" role="status"></p>
+      </form>
+
+      <div id="usuarios-lista"></div>
+    </section>
+  </main>
+
+  <!-- Sugerencias con los nombres ya capturados -->
+  <datalist id="lista-jugadores"></datalist>
+
+  <!-- Moldes que JavaScript copia para cada pelea y cada persona -->
+  <template id="tpl-pelea">
+    <article class="pelea">
+      <header class="pelea-cabeza">
+        <h3 class="pelea-titulo"></h3>
+        <span class="pelea-total"></span>
+        <button class="btn-quitar quitar-pelea">Eliminar</button>
+      </header>
+      <div class="apuestas"></div>
+      <button class="btn btn-chico agregar-apuesta">+ Persona</button>
+    </article>
+  </template>
+
+  <template id="tpl-apuesta">
+    <div class="apuesta">
+      <input class="apuesta-nombre" list="lista-jugadores" placeholder="Nombre" autocomplete="off">
+      <label class="campo-mil">
+        <input class="apuesta-puntos" type="number" inputmode="decimal" min="0" step="any" placeholder="0">
+        <span>mil</span>
+      </label>
+      <button class="apuesta-resultado"></button>
+      <button class="btn-quitar quitar-apuesta" title="Quitar persona">✕</button>
+    </div>
+  </template>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.4.0/exceljs.min.js"></script>
+  <script type="module" src="js/admin.js"></script>
+</body>
+</html>

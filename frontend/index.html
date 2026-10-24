@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Palomas Live · Iniciar sesión</title>
+  <link rel="icon" href="img/logo.png">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body class="pagina-login">
+  <main class="login">
+    <img src="img/logo.png" alt="Palomas Live" class="login-logo">
+    <h1 class="login-titulo">Palomas Live</h1>
+    <p class="login-sub">Inicia sesión para ver tus hojas</p>
+
+    <form id="login" class="tarjeta login-form">
+      <label class="campo">Usuario
+        <input id="usuario" autocomplete="username" autocapitalize="none" required>
+      </label>
+      <label class="campo">Contraseña
+        <input id="contrasena" type="password" autocomplete="current-password" required>
+      </label>
+      <p id="login-error" class="mensaje error" role="alert"></p>
+      <button id="entrar" class="btn btn-principal btn-bloque">Entrar</button>
+    </form>
+
+    <p id="aviso-prueba" class="aviso-prueba" hidden>
+      Modo de prueba (sin backend). Admin: <strong>admin</strong> / <strong>admin123</strong>
+    </p>
+  </main>
+
+  <script type="module" src="js/login.js"></script>
+</body>
+</html>
